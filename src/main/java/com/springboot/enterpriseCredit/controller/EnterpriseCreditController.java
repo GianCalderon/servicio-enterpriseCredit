@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.enterpriseCredit.document.EnterpriseCredit;
+import com.springboot.enterpriseCredit.dto.EnterpriseCreditDto;
 import com.springboot.enterpriseCredit.service.EnterpriseCreditInterface;
 
 import reactor.core.publisher.Flux;
@@ -78,5 +79,15 @@ public class EnterpriseCreditController {
 	    }).defaultIfEmpty(new ResponseEntity<Void>(HttpStatus.NOT_FOUND));
 
 	  }
+	  
+	  @PostMapping("/saveDto")
+		public Mono<ResponseEntity<EnterpriseCreditDto>> saveDto(@RequestBody EnterpriseCreditDto enterpriseCreditDto) {
+
+			LOGGER.info(enterpriseCreditDto.toString());
+
+			return service.saveDto(enterpriseCreditDto).map(s -> ResponseEntity.created(URI.create("/api/enterpriseCredit"))
+					.contentType(MediaType.APPLICATION_JSON).body(s));
+
+		}
 
 }
