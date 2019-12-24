@@ -52,13 +52,15 @@ public class EnterpriseCreditController {
 	  }
 
 	  @PostMapping
-	  public Mono<ResponseEntity<EnterpriseCredit>> save(@RequestBody EnterpriseCredit enterpriseCredit) {
+		public Mono<ResponseEntity<EnterpriseCredit>> saveDto(@RequestBody EnterpriseCreditDto enterpriseCreditDto) {
 
+			LOGGER.info(enterpriseCreditDto.toString());
 
-	    return service.save(enterpriseCredit).map(e -> ResponseEntity.created(URI.create("/api/enterpriseCredit"))
-	                  .contentType(MediaType.APPLICATION_JSON).body(e));
+			return service.saveDto(enterpriseCreditDto).map(s -> ResponseEntity.created(URI.create("/api/enterpriseCredit"))
+					.contentType(MediaType.APPLICATION_JSON).body(s));
 
-	  }
+		}
+	  
 
 	  @PutMapping("/{id}")
 	  public Mono<ResponseEntity<EnterpriseCredit>> update(@RequestBody EnterpriseCredit enterpriseCredit,
@@ -80,14 +82,6 @@ public class EnterpriseCreditController {
 
 	  }
 	  
-	  @PostMapping("/saveDto")
-		public Mono<ResponseEntity<EnterpriseCreditDto>> saveDto(@RequestBody EnterpriseCreditDto enterpriseCreditDto) {
 
-			LOGGER.info(enterpriseCreditDto.toString());
-
-			return service.saveDto(enterpriseCreditDto).map(s -> ResponseEntity.created(URI.create("/api/enterpriseCredit"))
-					.contentType(MediaType.APPLICATION_JSON).body(s));
-
-		}
 
 }

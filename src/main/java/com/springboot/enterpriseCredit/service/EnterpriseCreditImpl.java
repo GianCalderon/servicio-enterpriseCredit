@@ -1,5 +1,7 @@
 package com.springboot.enterpriseCredit.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,13 +47,13 @@ public class EnterpriseCreditImpl implements EnterpriseCreditInterface {
 	@Override
 	public Mono<EnterpriseCredit> update(EnterpriseCredit enterpriseCredit, String id) {
 		// TODO Auto-generated method stub
-	    return repo.findById(id).flatMap(e -> {
+	    return repo.findById(id).flatMap(credito-> {
 
-	    	e.setCreditAmount(enterpriseCredit.getCreditAmount());
-	        e.setDateCredit(enterpriseCredit.getDateCredit());
-	        e.setTea(enterpriseCredit.getTea());
+	    	credito.setTea(enterpriseCredit.getTea());
+	        credito.setCantShare(enterpriseCredit.getCantShare());
+	        credito.setDateUpdate(new Date());
 	        
-	        return repo.save(e);
+	        return repo.save(credito);
 
 	      });
 	}
@@ -63,17 +65,9 @@ public class EnterpriseCreditImpl implements EnterpriseCreditInterface {
 	}
 
 	@Override
-	public Mono<EnterpriseCreditDto> saveDto(EnterpriseCreditDto enterpriseCreditDto) {
+	public Mono<EnterpriseCredit> saveDto(EnterpriseCreditDto enterpriseCreditDto) {
 		
-		return save(convert.convertEnterpriseCredit(enterpriseCreditDto)).flatMap(sa -> {
-
-			enterpriseCreditDto.getHolders().setIdCuenta(sa.getId());
-			webCLient.save(enterpriseCreditDto.getHolders()).block();
-			
-
-			return Mono.just(enterpriseCreditDto);
-		});
-		
+		return 	repo.save(convert.convertEnterpriseCredit(enterpriseCreditDto));
 		
 		
 	}

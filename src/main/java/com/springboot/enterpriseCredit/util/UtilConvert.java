@@ -1,5 +1,7 @@
 package com.springboot.enterpriseCredit.util;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 
 import com.springboot.enterpriseCredit.document.EnterpriseCredit;
@@ -13,11 +15,19 @@ public class UtilConvert {
 
 		EnterpriseCredit enterpriseCredit = new EnterpriseCredit();
 
-		enterpriseCredit.setName("Prestamo-Empresarial");
+		enterpriseCredit.setNameCredit("Credito-Empresarial");
+		enterpriseCredit.setNumDoc(enterpriseCreditDto.getNumberRuc());
 		enterpriseCredit.setCreditAmount(enterpriseCreditDto.getCreditAmount());
-		enterpriseCredit.setDateCredit(enterpriseCreditDto.getDateCredit());
 		enterpriseCredit.setTea(enterpriseCreditDto.getTea());
 		enterpriseCredit.setCantShare(enterpriseCreditDto.getCantShare());
+		enterpriseCredit.setAmountShare((enterpriseCreditDto.getCreditAmount()+
+				                      (enterpriseCreditDto.getCreditAmount()*(enterpriseCreditDto.getTea()/100)))
+				                      /enterpriseCreditDto.getCantShare());
+		
+		enterpriseCredit.setDateCreate(new Date());
+		enterpriseCredit.setDateUpdate(new Date());
+		
+		
 		
 		return enterpriseCredit;
 

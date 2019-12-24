@@ -18,7 +18,7 @@ public interface EnterpriseCreditInterface {
 	  
 	  public Mono<Void> delete(EnterpriseCredit enterpriseCredit);
 	  
-	  public Mono<EnterpriseCreditDto> saveDto(EnterpriseCreditDto enterpriseCreditDto);
+	  public Mono<EnterpriseCredit> saveDto(EnterpriseCreditDto enterpriseCreditDto);
 
 
 	
