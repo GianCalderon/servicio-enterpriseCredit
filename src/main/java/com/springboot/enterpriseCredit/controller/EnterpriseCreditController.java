@@ -52,7 +52,7 @@ public class EnterpriseCreditController {
 	  }
 
 	  @PostMapping
-		public Mono<ResponseEntity<EnterpriseCredit>> saveDto(@RequestBody EnterpriseCreditDto enterpriseCreditDto) {
+		public Mono<ResponseEntity<EnterpriseCreditDto>> saveDto(@RequestBody EnterpriseCreditDto enterpriseCreditDto) {
 
 			LOGGER.info(enterpriseCreditDto.toString());
 

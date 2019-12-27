@@ -16,7 +16,7 @@ public class UtilConvert {
 		EnterpriseCredit enterpriseCredit = new EnterpriseCredit();
 
 		enterpriseCredit.setNameCredit("Credito-Empresarial");
-		enterpriseCredit.setNumDoc(enterpriseCreditDto.getNumberRuc());
+		enterpriseCredit.setNumDoc(enterpriseCreditDto.getEnterprise().getNumDoc());
 		enterpriseCredit.setCreditAmount(enterpriseCreditDto.getCreditAmount());
 		enterpriseCredit.setTea(enterpriseCreditDto.getTea());
 		enterpriseCredit.setCantShare(enterpriseCreditDto.getCantShare());

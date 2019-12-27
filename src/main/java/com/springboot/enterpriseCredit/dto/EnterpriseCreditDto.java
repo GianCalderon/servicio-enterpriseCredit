@@ -11,9 +11,11 @@ import lombok.Data;
 @Data
 public class EnterpriseCreditDto {
 
-	private String numberRuc;
+	private String idEnterpriseCredit;
+
 	private Double creditAmount;
 	private Double tea;
 	private int cantShare;
+	private EnterpriseDto enterprise;
 
 }
